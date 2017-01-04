@@ -3,6 +3,7 @@ package com.pushapp.jobplanet.mypushapp.utils;
 import android.content.Context;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+import android.util.Log;
 import android.widget.Toast;
 
 import java.io.IOException;
@@ -25,21 +26,26 @@ public class Utils {
      */
     public static boolean isNetworkAvailable( Context ctx ){
         boolean connected = false;
-
+        Log.d("DEBUG","Connection "+connected);
         ConnectivityManager connMan = (ConnectivityManager) ctx.getSystemService(Context.CONNECTIVITY_SERVICE);
         NetworkInfo[] info = connMan.getAllNetworkInfo();
 
         for (NetworkInfo anInfo : info) {
-            if (anInfo.getState() == NetworkInfo.State.CONNECTED) {
+            if (anInfo.getState() == NetworkInfo.State.CONNECTED ||
+                    anInfo.getState()== NetworkInfo.State.CONNECTING ) {
                 Toast.makeText(ctx, "Internet is connected", Toast.LENGTH_SHORT).show();
                 connected = true;
+                Log.d("DEBUG","Connection "+connected);
+
             }
         }
+
         return connected;
     }
 
 
     /**
+     * @obsolete , use volley's methods
      * check server service availability
      * @param urlStr
      * @return

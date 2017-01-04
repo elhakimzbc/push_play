@@ -31,6 +31,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import com.pushapp.jobplanet.mypushapp.activities.MainActivity;
+import com.pushapp.jobplanet.mypushapp.utils.Utils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -95,6 +96,9 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
 
         mLoginFormView = findViewById(R.id.login_form);
         mProgressView = findViewById(R.id.login_progress);
+
+
+
     }
 
     private void populateAutoComplete() {
@@ -150,6 +154,8 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         if (mAuthTask != null) {
             return;
         }
+
+        Utils.isNetworkAvailable(this);
 
         // Reset errors.
         mEmailView.setError(null);
